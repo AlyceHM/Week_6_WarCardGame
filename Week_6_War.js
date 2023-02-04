@@ -67,10 +67,10 @@ function createDeck(player1, player2) {
     }
   }
 }
-let Molly = new Player("Molly");
-let Kelly = new Player("Kelly");
-createDeck(Molly, Kelly); //call on this function before the shuffle, since people are created before the cards are shuffled
-//console.log(deck);
+// let Molly = new Player("Molly"); //doesn't matter to the end game
+// let Kelly = new Player("Kelly");
+createDeck(); //call on this function before the shuffle, since people are created before the cards are shuffled
+// //console.log(deck);
 function shuffle() {
   for (let i = deck.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * i); //random number between 0 and i
@@ -83,6 +83,7 @@ function shuffle() {
 shuffle();
 
 function dealDeck(player1, player2) {
+  //deals the deck by cutting it in half between the players
   hand1 = deck.slice(0, 26);
   hand2 = deck.slice(26, 52);
   console.log(hand1, hand2);
@@ -102,7 +103,19 @@ function playTheGame() {
       console.log(player1.playerScore);
       console.log(player2.playerScore);
     }
-    //console.log(hand1[i]);
+    //console.log(hand1[i]); else if statement to check if player 2 has bigger rank
+    //else the cards must be tied
+    else if (hand2[i].rank > hand1[i].rank) {
+      console.log("Player 2 wins!");
+      player1.playerScore++;
+      console.log(hand1[i]);
+      console.log(hand2[i]);
+      console.log(player1.playerScore);
+      console.log(player2.playerScore);
+    } else {
+      console.log("There is a tie!");
+    }
   }
 }
+
 playTheGame();
